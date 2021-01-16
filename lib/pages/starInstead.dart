@@ -39,7 +39,7 @@ class _StartPageState extends State<StartPage> {
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     alignment: Alignment.topCenter,
                     child: Text(
-                      "Instead is a Social Networking application instead of Whatsapp,here you data is secured,your Data's are end to end encrypted",
+                      "Instead is a Social Networking application ,here you can chat with your Friends,let's try our InsteadApp",
                       style: TextStyle(
                         color: Colors.white,
                       ),

@@ -8,13 +8,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.yellow,
-        elevation: 10,
-        title: Text('Home'),
-    )
+    return MaterialApp(
+      home: Scaffold(
+
+          appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.blue,
+          elevation: 10,
+          title: Text("Chats"),
+
+      ),
+      endDrawer: Drawer(
+
+      ),
+      ),
+
     );
   }
 }
