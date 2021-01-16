@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "913917368598",
+    "project_id": "instead-app-230f3",
+    "storage_bucket": "instead-app-230f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913917368598:android:4a8d40969bd773ae9a1837",
+        "android_client_info": {
+          "package_name": "com.example.instead_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913917368598-3but0g1qds8af34r350csa840tmpk16q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY4fHMGVBd7jJEk93FzeCVPqrkb-YvQMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913917368598-3but0g1qds8af34r350csa840tmpk16q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
