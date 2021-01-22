@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instead_app/pages/home.dart';
+import 'package:instead_app/pages/signUppage.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -17,51 +18,47 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return
+         Scaffold(
+          backgroundColor: Colors.grey[300],
             appBar: AppBar(
               title: Text('Log In'),
               centerTitle: true,
               backgroundColor: Colors.blue,
               elevation: 10,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back_ios),
-              ),
             ),
             body: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              alignment: Alignment.center,
+              alignment: Alignment.bottomCenter,
               margin: EdgeInsets.all(10),
               child: SingleChildScrollView(
-                child:
-                  Form(
-                    key: formkey,
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            onTap: () {
-                              print("tap Happened");
-                            },
-                            validator: (input) {
-                              if (input.isEmpty) {
-                                return ("Email is not entered");
-                              }
-                            },
-                            onSaved: (input) => _email = input,
-                            decoration: InputDecoration(
-                              hintText: "write your Username",
-                              border: OutlineInputBorder(),
-                              labelText: "username",
-                            ),
+                child: Form(
+                  key: formkey,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          onTap: () {
+                            print("tap Happened");
+                          },
+                          validator: (input) {
+                            if (input.isEmpty) {
+                              return ("Email is not entered");
+                            }
+                          },
+                          onSaved: (input) => _email = input,
+                          decoration: InputDecoration(
+                            hoverColor: Colors.white,
+                            hintText: "write your Username",
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white)),
+                            labelText: "username",
                           ),
                         ),
+                      ),
                         Container(
                           padding: EdgeInsets.all(10),
                           child: TextFormField(
@@ -77,7 +74,8 @@ class _LoginPageState extends State<LoginPage> {
                             onSaved: (input) => _password = input,
                             decoration: InputDecoration(
                               hintText: "write your Password",
-                              border: OutlineInputBorder(),
+                              border: OutlineInputBorder(
+                              ),
                               labelText: "password",
                             ),
                             obscureText: true,
@@ -122,9 +120,13 @@ class _LoginPageState extends State<LoginPage> {
                                     style: TextStyle(fontSize: 20),
                                   ),
                                   onPressed: () {
-                                   print("signup clicked!");
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => SignUpPage()),
+                                    );
                                   },
-                                )
+                                ),
+                                SizedBox(height: 20,)
                               ],
                               mainAxisAlignment: MainAxisAlignment.center,
                             ))
@@ -133,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
               ),
-            )));
+            ));
   }
 
   Future<void> signIn() async {

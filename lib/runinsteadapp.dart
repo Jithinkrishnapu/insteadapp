@@ -1,6 +1,9 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:instead_app/pages/home.dart';
 import 'package:instead_app/pages/insteadLogin.dart';
+import 'package:instead_app/pages/signUppage.dart';
 import 'package:instead_app/pages/starInstead.dart';
 
 class InsteadApp extends StatefulWidget {
