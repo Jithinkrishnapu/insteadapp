@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:instead_app/pages/home.dart';
-import 'package:instead_app/pages/insteadLogin.dart';
+import 'package:instead_app/userspart/insteadLogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:instead_app/seviceAuth.dart';
+import 'package:instead_app/services/seviceAuth.dart';
 
 
 class SignUpPage extends StatefulWidget {

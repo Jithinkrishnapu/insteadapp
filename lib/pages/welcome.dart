@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:instead_app/pages/insteadLogin.dart';
+import 'package:instead_app/userspart/insteadLogin.dart';
 
 class StartPage extends StatefulWidget {
   @override
