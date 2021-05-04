@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:instead_app/pages/home.dart';
+import 'package:instead_app/services/database.dart';
 import 'package:instead_app/userspart/insteadLogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instead_app/services/seviceAuth.dart';
 
 
 class SignUpPage extends StatefulWidget {
+  final Function toggle;
+  SignUpPage(this.toggle);
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
   String _email, _password;
+   DatabaseMethods _databaseMethods = new DatabaseMethods();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final AuthenticationService _auth = AuthenticationService();
   TextEditingController _namecontroller = TextEditingController();
@@ -134,6 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   components(
                       press: () {
                         if (_formkey.currentState.validate()) {
+
                           Createuser();
                         }
                       },
@@ -152,23 +157,29 @@ class _SignUpPageState extends State<SignUpPage> {
                           SizedBox(
                             height: 20,
                           ),
-                          FlatButton(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            textColor: Colors.white,
-                            child: Text(
-                              "Sign In",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.blue),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
+                          GestureDetector(
+                            onTap: (){
+                              widget.toggle;
                             },
+                            child: FlatButton(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              textColor: Colors.white,
+                              child: Text(
+                                "Sign In",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.blue),
+                              ),
+                              onPressed: () {
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage(widget.toggle)),
+                                );
+                              },
+                            ),
                           )
                         ],
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -188,11 +199,17 @@ class _SignUpPageState extends State<SignUpPage> {
     if (result==null){
       print("email is not valid");
   }else {
+      Map<String,String>userinfoMap={
+        "name": _namecontroller.text,
+        "email":_emailcontroller.text,
+      };
+      _databaseMethods.uploadUserInfo(userinfoMap);
       print(result.toString());
       _namecontroller.clear();
       _emailcontroller.clear();
       _passcontroller.clear();
       Navigator.pop(context);
+
     }
 
       }

@@ -8,6 +8,8 @@ import 'package:instead_app/userspart/signUppage.dart';
 
 
 class LoginPage extends StatefulWidget {
+  final Function toggle;
+  LoginPage(this.toggle);
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -81,12 +83,11 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                           ),
                         ),
-                        FlatButton(
+                        TextButton(
                           onPressed: () {
                             print("forgot password");
                           },
                           child: Text("forgot password?"),
-                          textColor: Colors.blue[700],
                         ),
                         FlatButton(
                           onPressed: () {
@@ -111,20 +112,26 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                FlatButton(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  textColor: Colors.white,
-                                  color: Colors.greenAccent[400],
-                                  child: Text(
-                                    'Create New Account',
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => SignUpPage()),
-                                    );
+                                GestureDetector(
+                                  onTap: (){
+                                    widget.toggle;
                                   },
+
+                                  child: FlatButton(
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    textColor: Colors.white,
+                                    color: Colors.greenAccent[400],
+                                    child: Text(
+                                      'Create New Account',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => SignUpPage(widget.toggle)),
+                                      );
+                                    },
+                                  ),
                                 ),
                                 SizedBox(height: 20,)
                               ],

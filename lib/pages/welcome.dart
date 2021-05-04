@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:instead_app/services/helper.dart';
 import 'package:instead_app/userspart/insteadLogin.dart';
 
 class StartPage extends StatefulWidget {
@@ -61,7 +62,7 @@ class _StartPageState extends State<StartPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
+                          MaterialPageRoute(builder: (context) => AuthsignandUp()),
                         );
                       },
                       child: Text("Get Started"),

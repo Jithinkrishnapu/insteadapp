@@ -22,7 +22,7 @@ class _InsteadAppState extends State<InsteadApp> {
         Scaffold(
           backgroundColor: Colors.blue,
           body:Center(
-          child: ChatPage(
+          child: StartPage(
         ),
         ),
 

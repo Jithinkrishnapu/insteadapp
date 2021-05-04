@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:instead_app/pages/Chat/chatpage.dart';
+import 'package:instead_app/run_insteadapp.dart';
+import 'package:instead_app/services/helper.dart';
+import 'package:instead_app/userspart/insteadLogin.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,6 +12,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FirebaseAuth firebaseAuth = new FirebaseAuth.instanceFor(app:Firebase.app());
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +25,12 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.blue,
           elevation: 5,
           title: Text("Chats"),
+          actions: [
+            IconButton(onPressed: (){
+              _signOut();
+             Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthsignandUp()));
+            }, icon: Icon(Icons.logout))
+          ],
 
         ),
        bottomNavigationBar: BottomNavigationBar(
@@ -28,16 +43,12 @@ class _HomePageState extends State<HomePage> {
          items: [
            BottomNavigationBarItem(
              icon: Icon(Icons.message),
-             title: Text("Chats"),
-           ),
+             label: "Chats"),
            BottomNavigationBarItem(
-             icon: Icon(Icons.camera_alt),
-             title: Text("Camera"),
-           ),
+             icon: Icon(Icons.camera_alt), label: "Camera"),
            BottomNavigationBarItem(
              icon: Icon(Icons.account_box),
-             title: Text("Profile"),
-           ),
+             label: "Profile"),
          ],
        ),
        body: ChatPage(),

@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:instead_app/Components/searchbar.dart';
 import 'package:instead_app/pages/Chat/ConversationList.dart';
 import 'package:instead_app/pages/Chat/chatuserModel.dart';
+import 'package:instead_app/pages/searchPage.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -115,7 +116,9 @@ class _ChatPageState extends State<ChatPage> {
                 ],
               ),
             )),
-            SearchBar(),
+            SearchBar(
+              read: true,
+            ),
             ListView.builder(
               itemCount: chatUsers.length,
               shrinkWrap: true,
