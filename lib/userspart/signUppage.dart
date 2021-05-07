@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:instead_app/pages/home.dart';
 import 'package:instead_app/services/database.dart';
+import 'package:instead_app/services/sharepreference.dart';
 import 'package:instead_app/userspart/insteadLogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instead_app/services/seviceAuth.dart';
@@ -203,7 +204,10 @@ class _SignUpPageState extends State<SignUpPage> {
         "name": _namecontroller.text,
         "email":_emailcontroller.text,
       };
+      HelperFunctions.saveUserNameSharedPreference(_namecontroller.text);
+      HelperFunctions.saveUserEmailSharedPreference(_emailcontroller.text);
       _databaseMethods.uploadUserInfo(userinfoMap);
+      HelperFunctions.saveUserLoggedInSharedPreference(true);
       print(result.toString());
       _namecontroller.clear();
       _emailcontroller.clear();

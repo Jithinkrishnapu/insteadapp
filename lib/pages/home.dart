@@ -18,8 +18,7 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.blue,
@@ -52,7 +51,6 @@ class _HomePageState extends State<HomePage> {
          ],
        ),
        body: ChatPage(),
-       ),
-    );
+       );
   }
 }

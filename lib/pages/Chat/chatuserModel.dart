@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class ChatUsers{
+
   String name;
   String messageText;
   String imageURL;

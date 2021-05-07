@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:instead_app/Components/searchbar.dart';
+import 'package:instead_app/pages/Chat/chatPageDetail.dart';
+import 'package:instead_app/pages/Chat/messagetextbox.dart';
+import 'package:instead_app/services/constant.dart';
 import 'package:instead_app/services/database.dart';
 
 class SearchPage extends StatefulWidget {
@@ -24,6 +27,26 @@ class _SearchPageState extends State<SearchPage> {
    });
   }
 
+  sendMessage(String userName){
+    List<String> users = [Constants.me,userName];
+
+    String chatRoomId = getChatRoomId(Constants.me,userName);
+
+    Map<String, dynamic> chatRoom = {
+      "users": users,
+      "chatRoomId" : chatRoomId,
+    };
+
+    _databaseMethods.addChatRoom(chatRoom, chatRoomId);
+
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => MessageBox(
+           chatRoomId,
+        )
+    ));
+
+  }
+
   Widget searchList(){
     return searchSnapshot != null ? ListView.builder(
       shrinkWrap: true,
@@ -31,7 +54,52 @@ class _SearchPageState extends State<SearchPage> {
       itemBuilder: (context,index){
       return SearchTile(userName: searchSnapshot.docs[index].get('name').toString(),
           userEmail:  searchSnapshot.docs[index].get('email').toString());
-    },):Container();
+    }):Container();
+  }
+
+  getChatRoomId(String a, String b) {
+    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+      return "$b\_$a";
+    } else {
+      return "$a\_$b";
+    }
+  }
+  Widget SearchTile({String userName,String userEmail}){
+  return  Container(
+      margin: EdgeInsets.all(10),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(userName),
+                Text(userEmail),
+              ],
+            ),
+          ),
+          Spacer(),
+          GestureDetector(
+            onTap: (){
+              sendMessage(userName);
+
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.blue,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(child: Text("Message",style: TextStyle(color: Colors.white),)),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -59,6 +127,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
               GestureDetector(
                 onTap: (){
+                  print("tap happened");
                   initiateSearch();
                 },
                 child: Container(
@@ -73,44 +142,4 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
-
-class SearchTile extends StatelessWidget {
-  final String userName;
-  final String userEmail;
-  SearchTile({this.userEmail,this.userName});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(userName),
-                Text(userEmail),
-              ],
-            ),
-          ),
-          Spacer(),
-          GestureDetector(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.blue,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(child: Text("Message",style: TextStyle(color: Colors.white),)),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
 

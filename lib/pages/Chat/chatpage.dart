@@ -4,6 +4,8 @@ import 'package:instead_app/Components/searchbar.dart';
 import 'package:instead_app/pages/Chat/ConversationList.dart';
 import 'package:instead_app/pages/Chat/chatuserModel.dart';
 import 'package:instead_app/pages/searchPage.dart';
+import 'package:instead_app/services/constant.dart';
+import 'package:instead_app/services/sharepreference.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -66,9 +68,21 @@ class _ChatPageState extends State<ChatPage> {
             "https://i0.wp.com/www.newsgram.com/wp-content/uploads/2018/01/C3eOndKVYAAKAyp.jpg",
         time: "2:20")
   ];
+
+
+  getUserinfo()async{
+    Constants.me = await HelperFunctions.getUserNameSharedPreference();
+  }
+@override
+  void initState() {
+    getUserinfo();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(

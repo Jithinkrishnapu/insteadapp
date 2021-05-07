@@ -3,6 +3,8 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:instead_app/pages/Chat/chatpage.dart';
 import 'package:instead_app/pages/home.dart';
+import 'package:instead_app/services/helper.dart';
+import 'package:instead_app/services/sharepreference.dart';
 import 'package:instead_app/userspart/insteadLogin.dart';
 import 'package:instead_app/userspart/signUppage.dart';
 import 'package:instead_app/pages/welcome.dart';
@@ -13,6 +15,21 @@ class InsteadApp extends StatefulWidget {
 }
 
 class _InsteadAppState extends State<InsteadApp> {
+  bool userIsLoggedIn;
+
+  @override
+  void initState() {
+    getLoggedInState();
+    super.initState();
+  }
+
+  getLoggedInState() async {
+    await HelperFunctions.getUserLoggedInSharedPreference().then((value){
+      setState(() {
+        userIsLoggedIn  = value;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,8 +39,7 @@ class _InsteadAppState extends State<InsteadApp> {
         Scaffold(
           backgroundColor: Colors.blue,
           body:Center(
-          child: StartPage(
-        ),
+          child:  userIsLoggedIn != null ? userIsLoggedIn ? HomePage() : AuthsignandUp(): StartPage()
         ),
 
     ),

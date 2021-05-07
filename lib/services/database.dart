@@ -12,4 +12,34 @@ FirebaseFirestore.instance.collection("users").add(userMap);
    return FirebaseFirestore.instance.collection("users").where("name",isEqualTo: userName).get();
 
   }
+ 
+  getUserByEmail(String email) async {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .where("email", isEqualTo: email)
+        .get()
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
+  Future<bool> addChatRoom(chatRoom, chatRoomId) {
+    FirebaseFirestore.instance
+        .collection("chatRoom")
+        .doc(chatRoomId)
+        .set(chatRoom)
+        .catchError((e) {
+      print(e);
+    });
+  }
+  addConversationMessage(String chatRoomId,messageMap){
+   FirebaseFirestore.instance.collection("chatRoom").doc(chatRoomId).collection("chats").add(messageMap).catchError((e){
+      print(e.toString());
+    }
+    );
+  }
+
+  getMessage(String chatRoomId)async{
+   return await FirebaseFirestore.instance.collection("chatRoom").doc(chatRoomId).collection("chats").orderBy("time",descending: false).snapshots();
+  }
+  
 }
