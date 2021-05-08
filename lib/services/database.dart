@@ -41,5 +41,10 @@ FirebaseFirestore.instance.collection("users").add(userMap);
   getMessage(String chatRoomId)async{
    return await FirebaseFirestore.instance.collection("chatRoom").doc(chatRoomId).collection("chats").orderBy("time",descending: false).snapshots();
   }
+
+  getChatRoom(String userName)async{
+    return await FirebaseFirestore.instance.collection("chatRoom").where("users",arrayContains: userName).snapshots();
+
+  }
   
 }

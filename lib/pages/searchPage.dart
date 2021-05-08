@@ -8,6 +8,8 @@ import 'package:instead_app/services/constant.dart';
 import 'package:instead_app/services/database.dart';
 
 class SearchPage extends StatefulWidget {
+  final String userName;
+  SearchPage(this.userName);
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -18,19 +20,36 @@ class _SearchPageState extends State<SearchPage> {
   DatabaseMethods _databaseMethods = new DatabaseMethods();
 
   TextEditingController searchTextController = new TextEditingController();
-
+  bool isLoading = false;
+  bool haveUserSearched = false;
   initiateSearch()async{
-   return await _databaseMethods.getUserByUsername(searchTextController.text).then((val){
+   if(searchTextController.text.isNotEmpty){
      setState(() {
-       searchSnapshot = val;
+       isLoading = true;
      });
-   });
+     return await _databaseMethods.getUserByUsername(searchTextController.text).then((val){
+       setState(() {
+         searchSnapshot = val;
+         print("$searchSnapshot");
+         setState(() {
+           isLoading = false;
+           haveUserSearched = true;
+           if(searchTextController.text ==Constants.me){
+             setState(() {
+               isLoading = true;
+             });
+           }
+         });
+       });
+     });
+
+   }
   }
 
-  sendMessage(String userName){
-    List<String> users = [Constants.me,userName];
+  sendMessage(String Username){
+    List<String> users = [Constants.me,widget.userName];
 
-    String chatRoomId = getChatRoomId(Constants.me,userName);
+    String chatRoomId = getChatRoomId(Constants.me,widget.userName);
 
     Map<String, dynamic> chatRoom = {
       "users": users,
@@ -48,7 +67,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget searchList(){
-    return searchSnapshot != null ? ListView.builder(
+    return haveUserSearched  ? ListView.builder(
       shrinkWrap: true,
       itemCount: searchSnapshot.docs.length,
       itemBuilder: (context,index){
@@ -83,7 +102,7 @@ class _SearchPageState extends State<SearchPage> {
           Spacer(),
           GestureDetector(
             onTap: (){
-              sendMessage(userName);
+              sendMessage(widget.userName);
 
             },
             child: Container(
@@ -127,7 +146,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
               GestureDetector(
                 onTap: (){
-                  print("tap happened");
+
                   initiateSearch();
                 },
                 child: Container(

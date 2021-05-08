@@ -15,6 +15,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
   String _email, _password;
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController emailEditingController = new TextEditingController();
@@ -46,7 +53,6 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           setState(() {
             isLoading = false;
-            //show snackbar
           });
         }
       });
@@ -116,12 +122,19 @@ class _LoginPageState extends State<LoginPage> {
                         hintText: "write your Password",
                         border: OutlineInputBorder(),
                         labelText: "password",
+                        suffixIcon: IconButton(
+                          onPressed: _toggle,
+                          icon: _obscureText ?Icon(Icons.remove_red_eye,color: Colors.blue,):Icon(Icons.remove_red_eye,color: Colors.black,),
+                        )
                       ),
-                      obscureText: true,
+                      obscureText: _obscureText,
                     ),
                   ),
+                  // FlatButton(onPressed:_toggle,
+                  // child: Text(_obscureText?"show":"Hide"),),
                   TextButton(
                     onPressed: () {
+
                       print("forgot password");
                     },
                     child: Text("forgot password?"),

@@ -16,6 +16,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
   String _email, _password;
    DatabaseMethods _databaseMethods = new DatabaseMethods();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -131,8 +138,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         hintText: "write your Password",
                         border: OutlineInputBorder(),
                         labelText: "password",
+                          suffixIcon: IconButton(
+                            onPressed: _toggle,
+                            icon: _obscureText ?Icon(Icons.remove_red_eye,color: Colors.blue,):Icon(Icons.remove_red_eye,color: Colors.black,),
+                          )
                       ),
-                      obscureText: true,
+                      obscureText: _obscureText,
                     ),
                   ),
                   gap(),
@@ -212,7 +223,7 @@ class _SignUpPageState extends State<SignUpPage> {
       _namecontroller.clear();
       _emailcontroller.clear();
       _passcontroller.clear();
-      Navigator.pop(context);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
 
     }
 

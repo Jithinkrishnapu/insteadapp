@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(onPressed: (){
               _signOut();
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthsignandUp()));
+             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AuthsignandUp()));
             }, icon: Icon(Icons.logout))
           ],
 

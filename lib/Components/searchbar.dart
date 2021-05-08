@@ -6,7 +6,8 @@ import 'package:instead_app/services/database.dart';
 
 class SearchBar extends StatefulWidget {
   final bool read;
-  const SearchBar({Key key, this.read}) : super(key: key);
+  final String userName;
+  const SearchBar({Key key, this.read,this.userName}) : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -22,7 +23,7 @@ class _SearchBarState extends State<SearchBar> {
         showCursor: false,
         enableInteractiveSelection: true,
         onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchPage(widget.userName)));
         },
       decoration: InputDecoration(
       hintText: "search..",
