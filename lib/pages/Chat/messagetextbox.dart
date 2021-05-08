@@ -106,7 +106,6 @@ class _MessageBoxState extends State<MessageBox> {
   }
   @override
   Widget build(BuildContext context) {
-    String userName;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -130,7 +129,7 @@ class _MessageBoxState extends State<MessageBox> {
                 ),
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      "https://pbs.twimg.com/profile_images/888341377729273856/OJGYfJTs_400x400.jpg"),
+                      "https://i.pinimg.com/736x/8f/24/b1/8f24b1575966f63608f752a0c95b4bf6.jpg"),
                   maxRadius: 20,
                 ),
                 SizedBox(
@@ -142,7 +141,7 @@ class _MessageBoxState extends State<MessageBox> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "mohanlal",
+                      "",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
