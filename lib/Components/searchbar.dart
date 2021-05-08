@@ -23,7 +23,7 @@ class _SearchBarState extends State<SearchBar> {
         showCursor: false,
         enableInteractiveSelection: true,
         onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchPage(widget.userName)));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchPage()));
         },
       decoration: InputDecoration(
       hintText: "search..",

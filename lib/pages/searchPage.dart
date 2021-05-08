@@ -8,8 +8,6 @@ import 'package:instead_app/services/constant.dart';
 import 'package:instead_app/services/database.dart';
 
 class SearchPage extends StatefulWidget {
-  final String userName;
-  SearchPage(this.userName);
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -47,9 +45,9 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   sendMessage(String Username){
-    List<String> users = [Constants.me,widget.userName];
+    List<String> users = [Constants.me,Username];
 
-    String chatRoomId = getChatRoomId(Constants.me,widget.userName);
+    String chatRoomId = getChatRoomId(Constants.me,Username);
 
     Map<String, dynamic> chatRoom = {
       "users": users,
@@ -102,7 +100,7 @@ class _SearchPageState extends State<SearchPage> {
           Spacer(),
           GestureDetector(
             onTap: (){
-              sendMessage(widget.userName);
+              sendMessage(userName);
 
             },
             child: Container(
